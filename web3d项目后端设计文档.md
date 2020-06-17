@@ -154,3 +154,36 @@ UML图如下：
 
 具体见接口文档：[https://shimo.im/docs/XQjVhxxT8kCrgwpP](https://shimo.im/docs/XQjVhxxT8kCrgwpP)
 
+# 4 服务器配置
+
+采用Docker进行部署，将项目打包为jar后上传到服务器，在tomcat镜像的基础上新建项目镜像。
+
+使用的Dockerfile分别如下：
+
+## 4.1 tomcat基础镜像
+
+```plain
+FROM maven:3.6.3-jdk-8
+ENV CATALINA_HOME /usr/local/tomcat
+ENV PATH $CATALINA_HOME/bin:$PATH
+RUN mkdir -p "$CATALINA_HOME"
+WORKDIR $CATALINA_HOME
+ENV TOMCAT_VERSION 8.5.54
+ENV TOMCAT_TGZ_URL https://www.apache.org/dist/tomcat/tomcat-8/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
+COPY tomcat.tar.gz tomcat.tar.gz
+RUN set -x \
+&& tar -xvf tomcat.tar.gz --strip-components=1 \
+&& rm bin/*.bat \
+&& rm tomcat.tar.gz*
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+```
+## 4.2 项目镜像
+
+```plain
+FROM java:8
+MAINTAINER bingo
+COPY pj.jar pj.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","pj.jar"]
+```
