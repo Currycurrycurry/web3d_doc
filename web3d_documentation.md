@@ -2,43 +2,478 @@
 
 ## 项目背景
 
+### web3d项目要求
+
+- 模拟真实世界中的环境，实现一个完整的多人在线Web3D教学式场景。
+
+- 用户拥有自己的虚拟形象，可以在这个环境中模拟真实世界中的操作，如行走、交流、或其他自定义的交互动作。
+
+  因此我们选择模拟人体内器官环境，用户扮演各类细胞角色，拥有自己的细胞虚拟形象，在这个环境中模拟真实细胞的各类操作，比如漫游、拟人交流、被病毒攻击等等。
+
+### 游戏背景
+
+#### 市场背景
+
+- 缺乏同类竞品，潜力巨大
+- 没有主流平台
+- 较为新颖
+
+#### 需求背景
+
+- 疫情之下 群众生物基础知识欠缺
+- 青少年儿童对于生物学习兴趣下降
+- 高中面临生物会考
+- 家长如何向孩子解释新冠病毒
+
+……
+
+#### 游戏背景
+
+同名动漫《工作细胞》
 
 
 
+## 需求规格说明
+
+### 《工作细胞》概述（完整系统）
+
+“工作细胞”是一款面向青少年的，基于Web的多人在线生物学习游戏系统。主要由“游戏中心”、“个人中心”、“角色图鉴”、“管理后台”（仅对管理员开放）四个模块构成。
+
+#### 游戏中心描述
+
+游戏中心是本系统的核心子模块。玩家在登陆/注册进入系统首页之后，可以点击游戏中心创建房间/随机加入房间/加入指定房间。当房间人数达到所选择的人数时，游戏统一开始。
+
+##### 游戏规则描述
+
+- 作为多细胞合作游戏，所有玩家随机掉落于某一共同器官环境，开始漫游。
+
+- 玩家通过wsad移动，鼠标控制视角旋转/瞄准，左键点击与对象交互。
+
+- 按B打开背包查看收集到的信息。
+
+- 点击NPC获得细胞和病毒信息/生物题。
+
+- 玩家需要维持血条，并且搜集足够多的信息/刷足够多的题（进度条100%）才能集体获得游戏胜利。
+
+- 所有玩家共享背包内收集到的信息。
+
+- 血条降到0时，游戏失败结束。
+
+- 玩家可以与其他玩家用文字的方式在下方聊天框中对话。
+
+  
+
+#### 个人中心描述
+
+##### 登录注册
+
+- 用户模块可分为两大类：普通玩家模块与管理员模块。
+
+- 用户可分为两类：普通玩家用户（通过注册方式登陆）和管理员用户（通过内置账号/后台配置成为管理员）。
+
+- 在刚进入系统之前，玩家需要有该系统下的普通玩家/管理员的账号和密码。
+
+1. 登陆
+
+   - 玩家可通过使用用户名和密码登陆系统。
+
+   （管理员用户可以是后台配置文件指定的形式，也可以直接通过admin用户来登陆）
+
+2. 注册
+   - 玩家可通过输入用户名、密码、和邮箱来完成注册。
+   - 玩家需要在注册时选定对应的虚拟形象，在进入系统之后仍然可以在多处修改。
+
+##### 基本信息
+
+- 玩家输入密码之后，可以修改他的个人信息（邮箱、性别、地区等基本信息，但注意用户名唯一且不可修改），并且修改他当前的虚拟形象。
+
+##### 历史战绩
+
+- 玩家可以查看自己过去的历史游戏记录，包括：
+  - 游戏状态
+  - 游戏分数
+  - 玩家列表
+  - 游戏时间
+
+##### 知识清单
+
+- 玩家可以查看自己历史游戏记录中获取的所有知识点，包括：
+  - 知识点类别，例如：高中生物
+  - 知识点详细内容
+
+#### 角色图鉴描述
+
+玩家可以查看所有系统内置的细胞模型，包括其对应的细胞类型、信息等，并且选择对应的细胞作为自己的虚拟形象。
+
+#### 管理后台描述
+
+当玩家是后台管理员时，显示这一界面。
+
+##### 玩家进度统计
+
+表格形式，以知识点解锁数从高到低给所有玩家进行排序，内容包括：
+
+- 排名
+- 用户名
+- 用户ID
+- 知识点解锁数
+- 游戏次数
+
+##### 游戏次数统计
+
+折线图形式，将玩家游戏次数按天分布情况作可视化展示。
+
+##### 玩家信息分析
+
+柱状图形式，对玩家基本信息（年龄和性别）的分布情况作可视化展示。
+
+##### 知识点管理
+
+作为管理员可以查看系统当前所有的知识点。
 
 ## 设计思路
 
+### 技术栈选取
+
+Web3d没有限制所使用的技术栈。
+
+经过多方调研，我们选择Vue + Three.js + Springboot + Hibernate 作为前后端分离架构的技术栈。
 
 
 
+## 项目分工
+
+**参与度与贡献度：1:1:1:1**
+
+- 前端Vue：@黄佳妮
+
+- 前端Three.js: @刘铭涵 @王嵩立
+
+- 后端Springboot：@田嘉禾
+
+  
 
 ## 项目组织
 
 ### 前端Vue
 
-#### 设计思路
+#### 外部组件说明
+
+- axios
+
+  这是一个基于浏览器XMLHttpRequest接口的客户端http API，使用方法如下：
+
+  - 发送请求
+
+  ```
+  axios.request(config)
+  axios.get(url[, config])
+  axios.delete(url[, config])
+  axios.head(url[, config])
+  axios.options(url[, config])
+  axios.post(url[, data[, config]])
+  axios.put(url[, data[, config]])
+  axios.patch(url[, data[, config]])
+  ```
+
+  - 处理相应
+
+  ```
+  axios.post('/login', {
+    firstName: 'Finn',
+    lastName: 'Williams'
+  })
+  .then((response) => {
+    console.log(response);
+  }, (error) => {
+    console.log(error);
+  });
+  ```
+
+  - 拦截器说明
+
+  ```javascript
+  axios.interceptors.request.use(
+      config => {
+        console.log("axios interceptor works...")
+        if (Cookies.get('token')) {
+          config.headers.jwt_token = Cookies.get('token');
+          console.log('config header is ' + config.headers);
+        }
+        return config;
+      },
+      err => {
+        return Promise.reject(err);
+      });
+  ```
+
+  ```javascript
+  axios.interceptors.response.use(
+      response => {
+        return response;
+      },
+      error => {
+        if (error.response) {
+          console.log('axios:' + error.response.status);
+          switch (error.response.status) {
+            case 403:
+              router.replace({
+                path: '/pages/Login',
+                query: {redirect: router.currentRoute.fullPath}
+              });
+              break;
+            case 400:
+              router.replace( {
+                path: '/pages/Login',
+                query: {redirect:  router.currentRoute.fullPath}
+              });break;
+          }
+        }
+        return Promise.reject(error.response.data);
+      }
+  );
+  ```
+
+- echarts
+
+  可视化图库
+
+- element-ui
+
+  我们挑选的UI组件库，语法类似bootstrap
+
+- jquery
+
+  在Vue中使用jquery进行一些常见操作
+
+- js-cookie
+
+  简化对于cookie的相关操作
+
+- live2d4Vue
+
+  引入live2d模型
+
+- Vue3dModel
+
+  引入threeJS模型
+
+- sockjs-client + stompjs
+
+  实现ws通信（Vue内实现聊天功能）
+
+- three
+
+  实现普通模型加载功能
+
+- vee-validate
+
+  常用表单验证
+
+- vue-router
+
+  路由控制
+
+- vuex
+
+  全局状态量维护
 
 #### UI设计
 
+- 配色
+
+考虑到本游戏的游戏风格，我们考虑使用红色与蓝色结合的UI配色，以表达人体环境的阴阳平衡。基础UI使用了element-ui的基础配色蓝色，而图表展示使用了红色系配色。
+
+- UX交互
+
+考虑到本项目的针对性与适用人群，我们没有使用过于复杂的导航栏组件，而是一切从简，降低进入游戏的成本，方便用户的交互，增强用户的粘性。
+
+- 风格综述
+
+继承《工作细胞》的整体UI，整体偏向可爱二次元风，使较为低龄的同学们更有点击的欲望。
+
 #### 模块划分
+
+- Component：页面布局组件
+- Api：统一规范定义后端接口
+- Router： 定义路由
+- Store：定义全局状态对象
+- Views: 定义基本视图页面
 
 #### 文件说明
 
+- public 静态资源目录
+- src 源代码
+  - api
+    - index.js 定义后端接口
+  - components
+    - Aside.vue 边栏组件
+    - Container.vue 全局容器
+    - Footer.vue 脚注组件
+    - Header.vue 头组件
+    - NavMenu.vue 导航栏组件
+    - Top.vue 扉页组件
+  - router
+    - index.js 定义整体路由
+  - store
+    - modules
+      - user.js 用户全局状态信息
+    - getters.js 定义store的变量映射
+    - store.js 规范引入所有module中的全局状态信息
+  - utils
+    - index.js 定义小工具函数
+    - validate.js 表单校验函数
+  - views
+    - admin
+      - AdminContainer.vue 管理页布局容器
+      - AllKnowledges.vue 知识点管理页面
+      - GameNum.vue 游戏次数页面
+      - UserInfos.vue 用户信息统计页面
+      - UserProgress.vue 用户进度页面
+    - errorPages
+      - 404.vue 
+      - 500.vue
+    - loin
+      - Login.vue 登陆页面
+    - personnel
+      - Information.vue 个人信息页面
+      - KnowledgeList.vue 知识列表页面
+      - Records.vue 历史战绩页面
+    - register
+      - Register.vue 注册页面
+    - Chatting.vue 游戏页面
+    - Hall.vue 主页页面 
+    - Models.vue 角色图鉴页面
+    - Room.vue 房间页面
+  - App.vue 全局App入口
+  - main.js 全局路由与拦截
+
+- index.html 入口文件
+- package.json 配置文件
+
 #### 难点阐述
 
+- iframe内嵌页面
+
+  ```
+  <iframe src="game/main/src/main.html" frameborder="0" scrolling="auto" height="500px" width="1200px" style="margin: 30px auto;"></iframe>
+  ```
+
+- ws通信
+
+  ```
+    let socket = new SockJS('http://122.51.160.221:8080/ws');
+    this.chat_socket = Stomp.over(socket);
+  ```
+
+  - 订阅示例：
+
+    ```
+     this.subscribe('/topic/' + Cookies.get('roomID') + '/userQuit', function(obj) {
+                            console.log('enter the user quit method');
+                            console.log('obj body is ' + obj.body);
+                            let user_id = obj.content.id;
+                            self.messageList.push({
+                                type: 2,
+                                msg: '用户 ' + self.onlineUserList[user_id]._username + ' 退出聊天',
+                                msgUser: null
+                            })
+                            delete self.onlineUserList[user_id]
+                            // let obj_ = JSON.parse(obj.body);
+                            self.$message.success("本房间结束游戏！");
+                        })
+    
+    ```
+
+  - 发送示例：
+
+    ```
+     send () {
+                    this.message = this.trim(this.inputValue)
+                    let msg = {
+                        'toId': -1,
+                        'fromId': this.user_id,
+                        'content':this.message,
+                        'roomId': parseInt(this.roomID)
+                    }
+                    if (this.message.length > 0) {
+                        this.chat_socket.send('/app/chatMessageToAll', {}, JSON.stringify(msg))
+                        this.inputValue=''
+                    }
+                },
+    ```
+
+    
+
 #### 亮点阐述
+
+- live2d插件
+
+- echarts数据可视化库
+
+  
 
 ### 前端3D
 
 #### 设计思路
 
+《工作细胞》互动游戏整体建立在一个封闭沙盒中，该沙盒模拟了人体内部的微观环境，有凹凸的地形和流动的血液。多玩家扮演受病毒感染的人体内的一颗细胞（B淋巴细胞，T淋巴细胞，血红蛋白，血小板等），通过合作收集知识点，完成答题挑战，最终获取足够的积分使人体恢复健康。通过有趣的互动和阶段性的知识输入/检测，使得玩家在游戏过程中获取生物学和免疫学知识。
+
+多名玩家进入游戏后组成队伍，共享收集到的资源和体力。当收集进度达到100%时，游戏成功；当生命值降为0时，游戏失败。
+
 #### 模块划分
+
+游戏主体共分为两大模块：漫游和NPC（Non-Player Character非玩家角色）交互。
+
+##### 漫游模块
+
+细胞进入游戏后会生成在地图的随机位置，玩家通过键盘WASD进行移动，鼠标移动转换视角。通过physijs物理引擎模拟了碰撞、摩擦、重力等真实的物理环境。如：上坡会受到重力的拉扯，在水中阻力较小移动变快，在粗糙的地面上会受到摩擦力的影响移动变得迟缓。同时，会遇到同一房间中的其他玩家和NPC，可以产生碰撞。
+
+##### 交互模块
+
+在玩家目视方向设置有虚拟准心，准心范围内有NPC的时候玩家可以通过点击鼠标与之进行交互。后台会随机提供给玩家反馈：①获得关于NPC的信息 ②获得一条生物学知识点 ③回答一道生物学常识题。其中，获取到的知识点和信息会即时存到玩家的背包中并且获得积分，之后通过按下B键随时查看背包内信息。如果玩家正确回答题目，则同样会获得积分奖励。在漫游的过程中，可能会有玩家不慎与NPC病毒发生了碰撞（非点击），此时的碰撞会导致玩家队伍的生命值降低。生命值降为0后游戏宣告失败。
 
 #### 文件说明
 
+- /models 目录下保存了所有游戏中形象的模型文件（.obj）和材质信息（.mtl）
+
+- /src
+
+  - /css 目录下有页面全局的样式单
+
+  - /js    目录下包含玩家控制的逻辑实现javascript文件
+
+    --main.html 游戏的主文件，包含场景渲染、前后端交互、和游戏的主逻辑
+
+    --MathUtils.js 游戏内数学运算的工具类（主要用于运动计算）
+
+    --Reflector.js / Refractor.js 模拟反射/折射效果的实现
+
+    --Water2.js 游戏中模拟湖泊的效果实现
+
 #### 难点阐述
 
+##### Physijs物理引擎模拟移动和后端位置同步的冲突
+
+##### 其他玩家名称显示
+
+##### 相机和碰撞体的结构关系
+
+##### 鼠标点击场景中物体判定
+
 #### 亮点阐述
+
+##### 游戏地形
+
+##### 浮力湖泊（血液）
+
+##### 悬浮红细胞粒子效果
+
+##### 游戏动画背景
+
+##### 实时显示背包和收集进度
+
+
 
 ### 后端
 
@@ -52,11 +487,88 @@
 
 #### 亮点阐述
 
+
+
+## *敏捷开发流程说明
+
+| 阶段   | 任务                                     | 时间       |      |
+| ------ | ---------------------------------------- | ---------- | ---- |
+| 阶段一 | 初步demo构建，素材收集、汇总、联调、集成 | 4.1～4.19  | ✔️    |
+| 阶段二 | 详细需求重构，素材收集、汇总、联调、集成 | 4.20～4.27 | ✔️    |
+| 阶段三 | 详细需求完善，素材收集、汇总、联调、集成 | 5.1～6.1   | ✔️    |
+
+- 结对编程
+
+  前后端持续结对编程
+
+- “站立”会议
+
+  每日在微信群中汇报进度
+
+- 小版本发布
+
+  维持一个基本可用的版本，在此基础上逐步增加新特性，进行小版本发布
+
+- 较少的文档
+
+  尽管每份文档字数不多，但每个阶段都要相应的需求文档、进度文档、设计文档。在最后提交的时候，进行综合汇总。
+
+- 以合作为中心，代码共享
+
+  在github上进行代码协作
+
+- 可调整计划
+
+  随时机动安排人员
+
 ## 云部署说明
 
 ### 前端
 
+#### 构建vue项目
 
+![image-20200607143939745](/Users/bytedance/Library/Application Support/typora-user-images/image-20200607143939745.png)
+
+```bash
+vue-cli-service build
+```
+
+#### 使用Docker部署
+
+- nginx配置
+
+  ```
+  server {
+          listen 80;
+          server_name localhost;
+  
+          access_log /var/log/nginx/host.access.log main;
+          error_log /var/log/nginx/error.log error;
+  
+          location / {
+                  root /usr/share/nginx/html;
+                  index index.html index.htm;
+          }
+  }
+  ```
+
+- Dockerfile编写
+
+  ```
+  FROM nginx
+  COPY dist/ /usr/share/nginx/html/
+  COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+  ```
+
+  自定义构建镜像的时候基于Dockerfile来构建。
+
+  `FROM nginx` 命令的意思该镜像是基于 nginx:latest 镜像而构建的。
+
+  `COPY dist/ /usr/share/nginx/html/` 命令的意思是将项目根目录下dist文件夹下的所有文件复制到镜像中 /usr/share/nginx/html/ 目录下。
+
+  `COPY nginx/default.conf /etc/nginx/conf.d/default.conf` 命令的意思是将nginx目录下的default.conf 复制到 etc/nginx/conf.d/default.conf，用本地的 default.conf 配置来替换nginx镜像里的默认配置。
+
+  
 
 ### 后端
 
@@ -68,21 +580,51 @@
 
 ### 基础功能自查
 
-
+| 功能点                     | 详细说明                                           | 完成情况 | 完成度 |
+| -------------------------- | -------------------------------------------------- | -------- | ------ |
+| 前台页面                   | 【必选】提供用户登录注册                           | ✔️        | 100%   |
+|                            | 【必选】选择相应的Web3D场景                        | ✔️        | 100%   |
+| 后台页面                   | 【必选】记录用户信息、虚拟形象等                   | ✔️        | 100%   |
+|                            | 【可选】根据场景可选提供历史行为查看和分析功能     | ✔️        | 100%   |
+| 虚拟Web3D场景              | 【必选】正确显示一个可交互的3D场景，有教学意义     | ✔️        | 100%   |
+| 支持多人加入同一个虚拟世界 | 【必选】相互可见，行为共享                         | ✔️        | 100%   |
+|                            | 【必选】可以进行一定方式的交流                     | ✔️        | 100%   |
+|                            | 【必选】环境中可以有一些可交互性的实体             | ✔️        | 100%   |
+| 维护虚拟世界的一致性       | 【必选】同一时刻各个化身看到的场景是一致的且最新的 | ✔️        | 100%   |
+|                            | 【可选】根据你的场景，可选提供实时聊天等附加功能   | ✔️        | 100%   |
+| 云部署                     | 【必选】部署在云服务器上，提供可以访问的公网地址。 | ✔️        | 100%   |
 
 ### 附加功能自查
+
+| 进阶功能项                 | 要求                                | 详细说明     | 是否完成 |
+| -------------------------- | ----------------------------------- | ------------ | -------- |
+| 虚拟形象选择5‘             | 用户可以选择、修改自己的虚拟形象    | 细胞形象选择 | ✔️        |
+| 图表化展示后台记录的数据5’ | 历史性未查看与分析功能              | echarts库    | ✔️        |
+| 人工智能因素10‘            | 增加智能虚拟人NPC，作简单响应       | Live2d看板娘 | ✔️        |
+| 其他合理亮眼的附加功能15’  | 游戏中不同房间的创建与加入          | 游戏中心页面 | ✔️        |
+|                            | 更精致、逼真的细胞模型与Threejs场景 | 游戏场景     | ✔️        |
+|                            | 更好的开发部署流程                  | 详见文档     | ✔️        |
+|                            | 更好的设计模式应用                  | 详见文档     | ✔️        |
 
 
 
 ## 参考目录
 
+- Axios教程
 
+  https://zhuanlan.zhihu.com/p/87836564
 
+- echarts教程
 
+  https://echarts.apache.org/zh/index.html
 
+- Vue插件教程
 
+  https://vuescrolljs.yvescoding.org/
 
+- element-ui文档
 
+  https://element.eleme.cn/#/zh-CN/component/table
 
-
+  
 
