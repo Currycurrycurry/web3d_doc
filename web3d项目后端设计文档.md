@@ -48,6 +48,22 @@
 * 使用REST风格的接口进行前后端数据交互
 * 使用jwt token进行权限判定
 * SpringBoot通过stomp协议实现双向通信功能
+### 2.2.1 系统的可复用性
+
+系统模块间具有隔离性，用户信息及websocket游戏部分互不干扰；
+
+需要增加功能时只需增加对应的Entitiy-Controller-Service，逻辑明确；
+
+整个系统的架构为分层次的。
+
+Entitiy代表数据库中的实体，Repository类负责与数据库进行交互；
+
+Service类为主要逻辑实现的类，注入Repository的实体，实现功能；
+
+Controller类为接口实现的类，负责进行请求的映射，在Controller类中注入Service实体并调用Service实体的方法可以实现接口的功能；
+
+系统的分层模块化使debug变得简洁，容易定位问题。
+
 ## 2.3 基本功能描述
 
 ### 2.3.1 登录，注册及个人信息
