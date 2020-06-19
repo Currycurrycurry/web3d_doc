@@ -692,16 +692,225 @@ loadFloor=function () {
 ### 后端
 
 #### 设计思路
+##### 概念术语描述
+
+######  细胞
+
+* 每个用户对应一个细胞
+* 每个细胞有属于自己的模型
+* 细胞间合作收集信息，进行游戏
+###### NPC
+
+* 以病毒的形象出现
+* 单击后能够进行交互，获得问题或知识点或细胞信息
+###### 细胞信息
+
+* 任意一条细胞的信息介绍
+###### 问题
+
+* 有四个选项，其中一个选项为正确的生物领域选择题
+###### 知识点
+
+* 任意一条生物领域的知识点
+###### 背包
+
+* 用户间互相合作，进行收集信息的背包
+* 每次游戏开始时会创建新的背包
+* 背包中存储信息，知识点及答对的问题
+* 当次游戏中每个用户收集到的知识（含以上三种）都将加入背包
+* 背包中存储的知识（含以上三种）达到一定数额时游戏结束
+
+##### 基本设计描述
+
+* 使用REST风格的接口进行前后端数据交互
+* 使用jwt token进行权限判定
+* SpringBoot通过stomp协议实现双向通信功能
 
 #### 模块划分
 
+整体分为用户信息模块及游戏逻辑模块。
+
 #### 文件说明
+
+遵循MVC架构及SpringBoot的一般设计模式，共有如下的几个包
+
+##### config
+
+用于配置跨域，websocket，上传文件地址映射
+
+* UploadFilePathConfig：上传文件路径映射配置
+* WebSocketConfig：websocket变量配置
+* CorsConfig：跨域配置
+
+##### controller
+
+接受请求，交给service包中的类处理
+
+* AuthController：用户信息相关的Controller
+* WebSocketController：游戏主体逻辑相关的Controller
+* PackController：背包相关的Controller
+* ProblemController：问题相关的Controller
+
+##### domain
+
+各实体类
+
+* User：用户
+* Pack：背包
+* Knowledge：知识点（游戏过程中可能呈现给用户的）
+* Position：位置（由于具有实时性故不存入数据库）
+* Virus：NPC
+* GameRecord：游戏记录
+* Authority：用户身份
+* CellInfo：细胞信息（游戏过程中可能呈现给用户的）
+* ChoiceQuestion：选择题（游戏过程中可能呈现给用户的）
+
+##### repository
+
+数据库接口，继承CrudRepository接口，运行时由SpringBoot自行注入（与除了Position的各实体类一一对应）
+
+##### security
+
+进行访问控制，对请求进行过滤及权限判断
+
+##### service
+
+对请求逻辑的实际处理
+
+* JwtUserDetailsService：解析jwt_token获取用户信息
+* ChoiceQuestionService：与数据库交互获取或存入选择题
+* KnowledgeService：与数据库交互获取或存入知识点
+* CellInfoService：与数据库交互获取或存入细胞信息
+* PackService：背包相关的服务
+* AuthService：用户信息相关的服务
+
+##### exception
+
+对异常的包装
+
+##### 类图
+
+总体结构如下：
+
+![图片](https://uploader.shimo.im/f/kq4DBu3SPW6Bxn0c.png!thumbnail)
+
+主要各包的具体结构如下
+
+###### config
+
+![图片](https://uploader.shimo.im/f/s6lb6L0jbsk6rb45.png!thumbnail)
+
+###### controller
+
+![图片](https://uploader.shimo.im/f/kyr18IPXyMYYy0WC.png!thumbnail)
+
+###### service
+
+![图片](https://uploader.shimo.im/f/IvXQMA0N1oV6wIk7.png!thumbnail)
+
+###### repository
+
+![图片](https://uploader.shimo.im/f/8sOFBNfFeAkNBMCa.png!thumbnail)
+
+###### domain
+
+![图片](https://uploader.shimo.im/f/EpAbN13wdpthFfDK.png!thumbnail)
+
+###### security
+
+![图片](https://uploader.shimo.im/f/ymZsOW7OBdbSQq6B.png!thumbnail)
+
+#### 数据库设计
+
+数据表由JPA自动生成，共有如下实体表：
+
+* cell_info               
+* choice_question          
+* game_record              
+* knowledge                
+* pack                        
+* user                       
+* virus
+
+UML图如下：
+
+![图片](https://uploader.shimo.im/f/hTllk1AZwBvlcSK9.png!thumbnail)
 
 #### 难点阐述
 
+##### 利用token进行身份验证
+
+利用token实现了系统的无状态，每次前端只需设置登录时发回的jwt_token在header中即可实现身份验证。
+
+```java
+protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    try{
+        if(request.getHeader("jwt_token") != null){
+            String token = request.getHeader("jwt_token");
+
+            String username = jwtTokenUtil.getUsernameFromToken(token);
+            User user = (User) jwtUserDetailsService.loadUserByUsername(username);
+            if(jwtTokenUtil.validateToken(token, user)){
+                setSecurityContext(new WebAuthenticationDetailsSource().buildDetails(request), token);
+            }
+        }
+    }catch (IllegalArgumentException e){
+        logger.warn(e.getLocalizedMessage());
+    }
+    filterChain.doFilter(request, response);
+}
+```
+
+##### 应用JPA进行映射自动建表
+
+每个实体中通过@OneToMany，@ManyToOne，@ManyToMany注解及MappedBy，JoinColumn设定实现了与其他实体的关联，并设置了cascade方便级联编辑，从而能够利用JPA自动生成表。
+例如：
+
+```Java
+@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+@JsonIgnore
+private Set<Knowledge> knowledgeSet;
+```
+
 #### 亮点阐述
 
+##### 系统的可复用性
 
+系统模块间具有隔离性，用户信息及websocket游戏部分互不干扰；
+
+需要增加功能时只需增加对应的Entitiy-Controller-Service，逻辑明确；
+
+整个系统的架构为分层次的。
+
+Entitiy代表数据库中的实体，Repository类负责与数据库进行交互；
+
+Service类为主要逻辑实现的类，注入Repository的实体，实现功能；
+
+Controller类为接口实现的类，负责进行请求的映射，在Controller类中注入Service实体并调用Service实体的方法可以实现接口的功能；
+
+系统的分层模块化使debug变得简洁，容易定位问题。
+
+##### 设计模式的应用
+
+###### MVC
+
+Model：各实体类
+Controller：各控制器类
+与传统MVC不同的是，本项目的后端并不封装ViewObject，而是遵循Rest原则将数据传递给前端，由前端将数据封装成View。
+
+###### 工厂模式
+
+工厂模式的实质是由一个工厂类根据传入的参数，动态决定应该创建哪一个产品类。 
+spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯一的标识来获得bean对象，但是否是在传入参数后创建还是传入参数前创建这个要根据具体情况来定。
+
+###### 策略模式
+
+在策略模式（Strategy Pattern）中，一个类的行为或其算法可以在运行时更改。这种类型的设计模式属于行为型模式。Spring中在实例化对象的时候会用到策略模式。
+
+###### 观察者模式
+
+当对象间存在一对多关系时，则使用观察者模式（Observer Pattern）。比如，当一个对象被修改时，则会自动通知它的依赖对象。观察者模式属于行为型模式。
+在游戏主逻辑中，各细胞位置被修改或与NPC进行交互后，会自动连带背包，地图更新，并通知其余客户端，属于观察者模式的应用。
 
 ## *敏捷开发流程说明
 
@@ -786,7 +995,38 @@ vue-cli-service build
 
 ### 后端
 
+采用Docker进行部署，将项目打包为jar后上传到服务器，在tomcat镜像的基础上新建项目镜像。
 
+使用的Dockerfile分别如下：
+
+#### tomcat基础镜像
+
+```plain
+FROM maven:3.6.3-jdk-8
+ENV CATALINA_HOME /usr/local/tomcat
+ENV PATH $CATALINA_HOME/bin:$PATH
+RUN mkdir -p "$CATALINA_HOME"
+WORKDIR $CATALINA_HOME
+ENV TOMCAT_VERSION 8.5.54
+ENV TOMCAT_TGZ_URL https://www.apache.org/dist/tomcat/tomcat-8/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
+COPY tomcat.tar.gz tomcat.tar.gz
+RUN set -x \
+&& tar -xvf tomcat.tar.gz --strip-components=1 \
+&& rm bin/*.bat \
+&& rm tomcat.tar.gz*
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+```
+
+#### 项目镜像
+
+```plain
+FROM java:8
+MAINTAINER bingo
+COPY pj.jar pj.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","pj.jar"]
+```
 
 
 
