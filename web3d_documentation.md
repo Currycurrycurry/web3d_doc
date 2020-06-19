@@ -453,27 +453,241 @@ Web3d没有限制所使用的技术栈。
 
 #### 难点阐述
 
-##### Physijs物理引擎模拟移动和后端位置同步的冲突
+##### Physijs物理引擎模拟移动旋转和后端位置同步的冲突
+
+基于Physijs进行位置和旋转的模拟，同时允许后端发送的位置信息（Dirty Position）和旋转(Dirty Rotation)。同时，由于后端发送的位置信息存在延迟，可能会引发位置的跳变，所以使用插值算法来使模型的位置同步更平滑。
+
+插值算法：
+
+```javascript
+this.update = function(){
+    if(this.startMoving){
+        //当开始接收到更新后的位置时开始插值计算位置更新
+        this.position.x = this.position.x + (this.nextPosition.x - this.position.x) * rate;
+        this.position.y = this.position.y + (this.nextPosition.y- this.position.y) * rate;
+        this.position.z = this.position.z + (this.nextPosition.z - this.position.z) * rate;
+        this.rotation.x = this.rotation.x + (this.nextRotation.x - this.rotation.x) * rate;
+        this.rotation.y = this.rotation.y + (this.nextRotation.y - this.rotation.y) * rate;
+        this.rotation.z = this.rotation.z + (this.nextRotation.z - this.rotation.z) * rate;
+    }
+    ...
+}
+```
 
 ##### 其他玩家名称显示
 
+利用Physijs的Font库，根据用户昵称创建立体字对象，并将立体字对象添加到模型顶部，从而实现在玩家的角色模型上方实时显示玩家名称（位置同步）
+
+示例：
+
+```javascript
+ geometry = new THREE.TextGeometry(nickName, {
+     //设置字体属性
+     font: idFont,
+     size: 2,
+     height: 0.2/*,
+     curveSegments: 12,
+     bevelEnabled: true,
+     bevelThickness: 10,
+     bevelSize: 8,
+     bevelSegments: 5*/
+ });
+//创建法向量材质
+var meshMaterial = new THREE.MeshNormalMaterial({
+    flatShading: THREE.FlatShading,
+    transparent: true,
+    opacity: 0.9
+});
+var mesh = new THREE.Mesh(geometry, meshMaterial);
+box.add(mesh);//将立体字对象添加到玩家模型
+mesh.position.set( 0,0,0);
+mesh.geometry.center();
+mesh.position.y = 12;
+```
+
 ##### 相机和碰撞体的结构关系
 
+相机绑定到模型上，位于模型的坐标系中，同时，模型需要锁定旋转轴。碰撞体和模型逻辑分离，模型只负责显示，而碰撞体是包裹在在模型外部的不可见盒子
+
+<img src="C:\Users\wangs\AppData\Roaming\Typora\typora-user-images\image-20200619145247662.png" alt="image-20200619145247662" style="zoom:67%;" />
+
 ##### 鼠标点击场景中物体判定
+
+用RayCaster像准心方向发射线，然后判断最近的一个目标物体的属性，然后产生相应的反馈。
+
+RayCaster示例：
+
+```javascript
+window.addEventListener('click',function (e) {
+            ...
+            var raycaster = new THREE.Raycaster();
+            var mouse = new THREE.Vector2();
+            var ev = e || window.event;
+            // 通过鼠标点击位置,计算出 raycaster 所需点的位置,以屏幕为中心点,范围 -1 到 1
+            mouse.x = 0;
+            mouse.y = 0;
+            //通过鼠标点击的位置(二维坐标)和当前相机的矩阵计算出射线位置
+            raycaster.setFromCamera(mouse, camera);
+            // 获取与raycaster射线相交的数组集合，其中的元素按照距离排序，越近的越靠前
+            var intersects = raycaster.intersectObjects(scene.children);
+            for(let i = 0; i < intersects.length;i++){
+                if(intersects[i].object.oType == 'virus'){
+                    console.log(intersects[i].object);
+                    let sendMsg = {
+                        'cellType':'T',
+                        'userId':playerId,
+                        'virusId': intersects[i].object.name.split("@")[1],
+                        'roomId':roomId
+                    };
+                    console.log(sendMsg);
+                    stompClient.send("/app/clickVirus", {},
+                        JSON.stringify(sendMsg));
+                    return;
+                }
+            }
+        });
+```
+
+
 
 #### 亮点阐述
 
 ##### 游戏地形
 
+通过unity地形建模后生成灰度图，然后再THREE.js中的HeightFieldMesh读取灰度图，蒋灰度作为高度数据渲染地图
+
+```javascript
+loadFloor=function () {
+        var ready = false;
+        var myImage = new Image();
+        let arr,ccc;
+    	//读取灰度图
+        myImage.src = "../objects/terrain.jpg";
+        myImage.onload = function(){
+            var canvas = document.createElement('canvas');
+            ccc= canvas;
+            canvas.height = 250;
+            canvas.width = 250;
+            var ctx=canvas.getContext("2d");
+            ctx.drawImage(myImage,0,0,250,250);
+            arr = ctx.getImageData(0,0,250,250).data;
+
+            loader = new THREE.TextureLoader();
+            // 设置地形材质，略
+            ground_material = Physijs.createMaterial(
+                ...
+            );
+            ...
+			// 插入高度数据
+            ground_geometry = new THREE.PlaneGeometry( 500, 500, 250, 250 );
+            let count = 0;
+            for ( var i = 0; i < ground_geometry.vertices.length; i++ ) {
+                var vertex = ground_geometry.vertices[i];
+                count++;
+                if(((vertex.x+250)/2*250+(250-vertex.y)/2)*4>=250*250*4)
+                    vertex.z = 0;
+                else
+                    vertex.z = arr[((vertex.x+250)/2*250+(250-vertex.y)/2)*4]*0.5;
+            }
+            ground_geometry.computeFaceNormals();
+            ground_geometry.computeVertexNormals();
+			//生成地形
+            ground = new Physijs.HeightfieldMesh(
+                ground_geometry,
+                ground_material,
+                0, // mass
+                250,
+                250
+            );
+            ground.position.set(0, -20, 0);
+            ground.rotation.x = Math.PI / -2;
+            ground.receiveShadow = true;
+            scene.add( ground );
+        };
+    };
+```
+
+
+
 ##### 浮力湖泊（血液）
+
+使用 jbouny / https://github.com/jbouny 提供的water类型库，生成流体。同时该库解助Reflector和Refractor赋予湖泊反射和折射效果，同时water设置了浮力和阻力属性，以更加符合现实场景。
+
+```javascript
+ var waterGeometry = new THREE.PlaneBufferGeometry( 500, 500 );
+        var params = {
+            color: '#ff9ea2',
+            scale: 4,
+            flowX: 1,
+            flowY: 1
+        };
+        water = new THREE.Water( waterGeometry, {
+            color: params.color,
+            scale: params.scale,
+            flowDirection: new THREE.Vector2( params.flowX, params.flowY ),
+            textureWidth: 1024,
+            textureHeight: 1024
+        } );
+        water.position.y = 1;
+        water.rotation.x = Math.PI * - 0.5;
+        scene.add( water );
+```
+
+
 
 ##### 悬浮红细胞粒子效果
 
+实际上是THREE.PointsMaterial实现的粒子效果，将红细胞作为粒子的贴图，实现红细胞悬浮的效果
+
+初始化红细胞：
+
+```javascript
+		/*白细胞漂浮*/
+        var geometry = new THREE.BufferGeometry();
+        var vertices = [];
+        var textureLoader = new THREE.TextureLoader();
+        var sprite1 = textureLoader.load( '../images/WBC1.png' );
+        var sprite2 = textureLoader.load( '../images/WBC1.png' );
+        var sprite3 = textureLoader.load( '../images/WBC3.png' );
+        var sprite4 = textureLoader.load( '../images/WBC4.png' );
+        var sprite5 = textureLoader.load( '../images/WBC5.png' );
+        for ( var i = 0; i < 50; i ++ ) {
+            var x = Math.random() * 500 - 250;
+            var y = Math.random() * 500 - 250;
+            var z = Math.random() * 500 - 250;
+            vertices.push( x, y, z );
+        }
+        geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+        parameters = [
+            [[ 1.0, 0.2, 0.5 ], sprite2, 20 ],
+            [[ 0.95, 0.1, 0.5 ], sprite3, 15 ],
+            [[ 0.90, 0.05, 0.5 ], sprite1, 10 ],
+            [[ 0.85, 0, 0.5 ], sprite5, 8 ],
+            [[ 0.80, 0, 0.5 ], sprite4, 5 ]
+        ];
+        for ( var i = 0; i < parameters.length; i ++ ) {
+            var color = parameters[ i ][ 0 ];
+            var sprite = parameters[ i ][ 1 ];
+            var size = parameters[ i ][ 2 ]*Math.random()*2;
+            materials[ i ] = new THREE.PointsMaterial( { size: size, map: sprite, blending: THREE.AdditiveBlending, depthTest: false, transparent: true } );
+            materials[ i ].color.setHSL( color[ 0 ], color[ 1 ], color[ 2 ] );
+            var particles = new THREE.Points( geometry, materials[ i ] );
+            particles.rotation.x = Math.random() * 6;
+            particles.rotation.y = Math.random() * 6;
+            particles.rotation.z = Math.random() * 6;
+            scene.add( particles );
+        }
+```
+
+
+
 ##### 游戏动画背景
+
+通过定义大量的div，结合css实现动态背景效果
 
 ##### 实时显示背包和收集进度
 
-
+通过订阅和发送，后端检测到背包更新后同步广播到房间内各个玩家更新背包。
 
 ### 后端
 
