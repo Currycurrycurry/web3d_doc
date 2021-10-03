@@ -278,18 +278,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| username   | 用户名   | String   | 是   | -   | 
-| password   | 密码   | String   | 是   | -   | 
+| username   | 用户名   | String   | 是   | -   |
+| password   | 密码   | String   | 是   | -   |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：登录成功  其他：失败   | int   | -   | 
-| message   | 登录成功则为token  其余字符串：异常信息在字符串中返回   | String   | 在请求/login和/register以外的api时需要以jwt_token的名字携带于header中   | 
-| content   | json序列化的User信息   | User   | 属性有username，password，fullname，age，region，gender，authorities（Set类型）   | 
+| code   | 200：登录成功  其他：失败   | int   | -   |
+| message   | 登录成功则为token  其余字符串：异常信息在字符串中返回   | String   | 在请求/login和/register以外的api时需要以jwt_token的名字携带于header中   |
+| content   | json序列化的User信息   | User   | 属性有username，password，fullname，age，region，gender，authorities（Set类型）   |
 
 ## 注册
 
@@ -299,20 +299,20 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| username   | 用户名   | String   | 是   | -   | 
-| password   | 密码   | String   | 是   | -   | 
-| email   | 邮箱   | String   | 是   | -   | 
-| modelId   | 模型id   | int   | 是   | -   | 
+| username   | 用户名   | String   | 是   | -   |
+| password   | 密码   | String   | 是   | -   |
+| email   | 邮箱   | String   | 是   | -   |
+| modelId   | 模型id   | int   | 是   | -   |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：注册成功  其他：失败   | int   | -   | 
-| message   | token：注册成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | json序列化的User信息   | User   | 属性有username，password，email，fullname，age，region，gender，authorities（Set类型）   | 
+| code   | 200：注册成功  其他：失败   | int   | -   |
+| message   | token：注册成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | json序列化的User信息   | User   | 属性有username，password，email，fullname，age，region，gender，authorities（Set类型）   |
 
 ## 上传头像
 
@@ -322,18 +322,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| file   | 头像文件   | MultipartFile   | 是   | 这个MultipartFile挺玄学的，具体可以搜一下orz，用ajax的话需要模拟表单才能发送   | 
-| jwt_token   | 记录用户信息的token   | String   | 是   | header   | 
+| file   | 头像文件   | MultipartFile   | 是   | 这个MultipartFile挺玄学的，具体可以搜一下orz，用ajax的话需要模拟表单才能发送   |
+| jwt_token   | 记录用户信息的token   | String   | 是   | header   |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | json序列化的User信息   | User   | 属性有username，password，fullname，age，region，gender，authorities（Set类型），headProfilePath  （头像文件URL）   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | json序列化的User信息   | User   | 属性有username，password，fullname，age，region，gender，authorities（Set类型），headProfilePath  （头像文件URL）   |
 
 ## 获得用户信息
 
@@ -343,17 +343,17 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| jwt_token   | 记录用户信息的token   | String   | 是   | header   | 
+| jwt_token   | 记录用户信息的token   | String   | 是   | header   |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | json序列化的User信息   | User   | 属性有username，password，fullname，age，region，gender，authorities（Set类型），headProfilePath  （头像文件URL）   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | json序列化的User信息   | User   | 属性有username，password，fullname，age，region，gender，authorities（Set类型），headProfilePath  （头像文件URL）   |
 
 ## 根据用户ID返回用户名
 
@@ -363,18 +363,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| jwt_token   | 记录用户信息的token   | String   | 是   | header   | 
-| userId   | id   | Long   | 是   | -   | 
+| jwt_token   | 记录用户信息的token   | String   | 是   | header   |
+| userId   | id   | Long   | 是   | -   |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | username   | String   | -   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | username   | String   | -   |
 
 ## 更改用户信息
 
@@ -384,25 +384,25 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|:----:|
-| username   | 用户名   | String   | 是   | 不能改…  另外这个请求也要加header（jwt_token）来验证权限   | 
-| email   | 邮箱   | String   | 是   | -   | 
-| fullName | 全名 | String | 否 | - | 
-| age | 年龄 | int | 否 | - | 
-| region | 地区 | String | 否 | - | 
-| gender | 性别 | String | 否 | - | 
-| originalPassword   | 旧密码   | String   | 是   | -   | 
-| newPassword   | 新密码   | String   | 否   | 不填就是不改   | 
-| modelId   | 模型id   | int   | 是   | -      | 
+| username   | 用户名   | String   | 是   | 不能改…  另外这个请求也要加header（jwt_token）来验证权限   |
+| email   | 邮箱   | String   | 是   | -   |
+| fullName | 全名 | String | 否 | - |
+| age | 年龄 | int | 否 | - |
+| region | 地区 | String | 否 | - |
+| gender | 性别 | String | 否 | - |
+| originalPassword   | 旧密码   | String   | 是   | -   |
+| newPassword   | 新密码   | String   | 否   | 不填就是不改   |
+| modelId   | 模型id   | int   | 是   | -      |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | json序列化的User信息   | User   | 属性有username，password，email，fullname，age，region，gender，authorities（Set类型），headProfilePath  （头像文件URL）   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | json序列化的User信息   | User   | 属性有username，password，email，fullname，age，region，gender，authorities（Set类型），headProfilePath  （头像文件URL）   |
 
 ## 游戏记录绑定
 
@@ -412,22 +412,22 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| jwt_token   | 用户token   | String   | 是   | header   | 
-| status   | 游戏状态   | String   | 是   | -   | 
-| score   | 游戏分数   | int   | 是   | -   | 
-| time   | 游戏时间   | String   | 是   | -   | 
-| userIds   | 参与游戏用户ID   | Set<Long>   | 是   | -   | 
-| packId   | 当前游戏背包ID   | long   | 是   | -   | 
+| jwt_token   | 用户token   | String   | 是   | header   |
+| status   | 游戏状态   | String   | 是   | -   |
+| score   | 游戏分数   | int   | 是   | -   |
+| time   | 游戏时间   | String   | 是   | -   |
+| userIds   | 参与游戏用户ID   | Set<Long>   | 是   | -   |
+| packId   | 当前游戏背包ID   | long   | 是   | -   |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | -   | -   | -   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | -   | -   | -   |
 
 ## 用户ID获取已获得过的知识点
 
@@ -437,18 +437,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| jwt_token   | 用户token   | String   | 是   | header   | 
-| userId   | 用户id   | long   | 是   | -   | 
+| jwt_token   | 用户token   | String   | 是   | header   |
+| userId   | 用户id   | long   | 是   | -   |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 知识点集合   | Set<Knowledge>   | Knowledge属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 知识点集合   | Set<Knowledge>   | Knowledge属性见上   |
 
 ## 用户ID获取玩家的历史战绩
 
@@ -458,18 +458,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----:|:----:|:----:|:----:|:----:|
-| jwt_token | 用户token | String | 是 | header | 
-| userId | 用户id | long | 是 | - | 
+| jwt_token | 用户token | String | 是 | header |
+| userId | 用户id | long | 是 | - |
 
 **返回参数**：
 
-| 字段名 | 说明 | 类型 | 备注 | 
+| 字段名 | 说明 | 类型 | 备注 |
 |:----:|:----:|:----:|:----:|
-| code | 200：成功其他：失败 | int | - | 
-| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - | 
-| content | Array of Record |    | [{  gameId: '1',  status: '成功',  score: '12',  players: 'alice, bob, curry',  time: '2019-01-01 12:00'  },...  ]   | 
+| code | 200：成功其他：失败 | int | - |
+| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - |
+| content | Array of Record |    | [{  gameId: '1',  status: '成功',  score: '12',  players: 'alice, bob, curry',  time: '2019-01-01 12:00'  },...  ]   |
 
 ## 用户ID获取玩家是否是管理员
 
@@ -479,18 +479,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----:|:----:|:----:|:----:|:----:|
-| jwt_token | 用户token | String | 是 | header | 
-| userId | 用户id | long | 是 | - | 
+| jwt_token | 用户token | String | 是 | header |
+| userId | 用户id | long | 是 | - |
 
 **返回参数**：
 
-| 字段名 | 说明 | 类型 | 备注 | 
+| 字段名 | 说明 | 类型 | 备注 |
 |:----:|:----:|:----:|:----:|
-| code | 200：成功其他：失败 | int | - | 
-| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - | 
-| content | isAdmin | Boolean | True or False | 
+| code | 200：成功其他：失败 | int | - |
+| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - |
+| content | isAdmin | Boolean | True or False |
 
 ## 获取所有玩家进度列表
 
@@ -500,17 +500,17 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----:|:----:|:----:|:----:|:----:|
-| jwt_token | 用户token | String | 是 | header | 
+| jwt_token | 用户token | String | 是 | header |
 
 **返回参数**：
 
-| 字段名 | 说明 | 类型 | 备注 | 
+| 字段名 | 说明 | 类型 | 备注 |
 |:----:|:----:|:----:|:----:|
-| code | 200：成功其他：失败 | int | - | 
-| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - | 
-| content | Array of Users(按照knowledgeNum降序排序)   |    | [      {      rank: '1',      name: 'Curry',      userId: '1',      knowledgeNum: 100,      gameNum: 5,      },  ]     | 
+| code | 200：成功其他：失败 | int | - |
+| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - |
+| content | Array of Users(按照knowledgeNum降序排序)   |    | [      {      rank: '1',      name: 'Curry',      userId: '1',      knowledgeNum: 100,      gameNum: 5,      },  ]     |
 
 ## 获取玩家游戏次数
 
@@ -520,17 +520,17 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----:|:----:|:----:|:----:|:----:|
-| jwt_token | 用户token | String | 是 | header | 
+| jwt_token | 用户token | String | 是 | header |
 
 **返回参数**：
 
-| 字段名 | 说明 | 类型 | 备注 | 
+| 字段名 | 说明 | 类型 | 备注 |
 |:----:|:----:|:----:|:----:|
-| code | 200：成功其他：失败 | int | - | 
-| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - | 
-| content | timeRange  timeRangeNum   | Array | 两数组对应，获取每个时间范围（time_range中项）的所有玩家游戏次数(time_range_num中项)     | 
+| code | 200：成功其他：失败 | int | - |
+| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - |
+| content | timeRange  timeRangeNum   | Array | 两数组对应，获取每个时间范围（time_range中项）的所有玩家游戏次数(time_range_num中项)     |
 
 ## 获取所有玩家基本信息量化排序
 
@@ -540,17 +540,17 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----:|:----:|:----:|:----:|:----:|
-| jwt_token | 用户token | String | 是 | header | 
+| jwt_token | 用户token | String | 是 | header |
 
 **返回参数**：
 
-| 字段名 | 说明 | 类型 | 备注 | 
+| 字段名 | 说明 | 类型 | 备注 |
 |:----:|:----:|:----:|:----:|
-| code | 200：成功其他：失败 | int | - | 
-| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - | 
-| content | ageRange,  ageRangeNum,  genderRange,  genderRangeNum         | Arrays |      | 
+| code | 200：成功其他：失败 | int | - |
+| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - |
+| content | ageRange,  ageRangeNum,  genderRange,  genderRangeNum         | Arrays |      |
 
 ## 用户选择虚拟形象
 
@@ -560,18 +560,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----:|:----|:----|:----:|:----|
-| modelId |    | Integer   | y |    | 
-| userId   |    |    |    |    | 
+| modelId |    | Integer   | y |    |
+| userId   |    |    |    |    |
 
 **返回参数**：
 
-| 字段名 | 说明 | 类型 | 备注 | 
+| 字段名 | 说明 | 类型 | 备注 |
 |:----:|:----:|:----:|:----:|
-| code | 200：成功其他：失败 | int | - | 
-| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - | 
-|    |        |    |      | 
+| code | 200：成功其他：失败 | int | - |
+| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - |
+|    |        |    |      |
 
 ## 获得所有知识点
 
@@ -581,17 +581,17 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----:|:----:|:----:|:----:|:----:|
-| jwt_token | 用户token | String | 是 | header | 
+| jwt_token | 用户token | String | 是 | header |
 
 **返回参数**：
 
-| 字段名 | 说明 | 类型 | 备注 | 
+| 字段名 | 说明 | 类型 | 备注 |
 |:----:|:----:|:----:|:----:|
-| code | 200：成功其他：失败 | int | - | 
-| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - | 
-| content |        | Arrays | [      {          id: '12987122',          type: '选择题', *// 选择题/细胞信息/知识点*  *        *desc: '1+1=2', *//知识点内容*  *    *},]       | 
+| code | 200：成功其他：失败 | int | - |
+| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - |
+| content |        | Arrays | [      {          id: '12987122',          type: '选择题', *// 选择题/细胞信息/知识点*  *        *desc: '1+1=2', *//知识点内容*  *    *},]       |
 
 ## 增加知识点
 
@@ -601,18 +601,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----|:----|:----|:----|:----|
-| content   | 内容   |    |    |    | 
-| type   | 类型   |    |    | *选择题/细胞信息/知识点*   | 
+| content   | 内容   |    |    |    |
+| type   | 类型   |    |    | *选择题/细胞信息/知识点*   |
 
 **返回参数**：
 
-| 字段名 | 说明 | 类型 | 备注 | 
+| 字段名 | 说明 | 类型 | 备注 |
 |:----:|:----:|:----:|:----:|
-| code | 200：成功其他：失败 | int | - | 
-| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - | 
-| content |      |    |        | 
+| code | 200：成功其他：失败 | int | - |
+| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - |
+| content |      |    |        |
 
 ## 删除知识点
 
@@ -622,18 +622,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----|:----|:----|:----|:----|
-| id   |    |    |    |    | 
-| type |    |    |    |    | 
+| id   |    |    |    |    |
+| type |    |    |    |    |
 
 **返回参数**：
 
-| 字段名 | 说明 | 类型 | 备注 | 
+| 字段名 | 说明 | 类型 | 备注 |
 |:----:|:----:|:----:|:----:|
-| code | 200：成功其他：失败 | int | - | 
-| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - | 
-| content |        |    |        | 
+| code | 200：成功其他：失败 | int | - |
+| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - |
+| content |        |    |        |
 
 ## 修改知识点
 
@@ -643,19 +643,19 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----|:----|:----|:----|:----|
-| id   |    |    |    |    | 
-| content   |    |    |    |    | 
-| type |    |    |    |    | 
+| id   |    |    |    |    |
+| content   |    |    |    |    |
+| type |    |    |    |    |
 
 **返回参数**：
 
-| 字段名 | 说明 | 类型 | 备注 | 
+| 字段名 | 说明 | 类型 | 备注 |
 |:----:|:----:|:----:|:----:|
-| code | 200：成功其他：失败 | int | - | 
-| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - | 
-| content |        |    |        | 
+| code | 200：成功其他：失败 | int | - |
+| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - |
+| content |        |    |        |
 
 ## 创建房间
 
@@ -665,18 +665,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----|:----|:----|:----|:----|
-| name   |    | String   |    |    | 
-| playerNum   |    | int   |    | 默认为2   | 
+| name   |    | String   |    |    |
+| playerNum   |    | int   |    | 默认为2   |
 
 **返回参数**：
 
-| 字段名 | 说明 | 类型 | 备注 | 
+| 字段名 | 说明 | 类型 | 备注 |
 |:----:|:----:|:----:|:----:|
-| code | 200：成功其他：失败 | int | - | 
-| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - | 
-| content | 新创建的Room     | Room   |        | 
+| code | 200：成功其他：失败 | int | - |
+| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - |
+| content | 新创建的Room     | Room   |        |
 
 ## 获取房间信息
 
@@ -688,11 +688,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名 | 说明 | 类型 | 备注 | 
+| 字段名 | 说明 | 类型 | 备注 |
 |:----:|:----:|:----:|:----:|
-| code | 200：成功其他：失败 | int | - | 
-| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - | 
-| content | 房间信息     | Set<Room> |        | 
+| code | 200：成功其他：失败 | int | - |
+| message | "success"：成功其他：失败（信息在字符串中有说明） | String | - |
+| content | 房间信息     | Set<Room> |        |
 
 # 学习场景界面
 
@@ -704,19 +704,19 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| jwt_token   | 用户token   | String   | 是   | header   | 
-| type   | 细胞类型   | String   | 是   |    | 
-| nickname   | 细胞昵称   | String   | 是   |    | 
+| jwt_token   | 用户token   | String   | 是   | header   |
+| type   | 细胞类型   | String   | 是   |    |
+| nickname   | 细胞昵称   | String   | 是   |    |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 新创建的细胞   | Cell   | Cell的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 新创建的细胞   | Cell   | Cell的属性见上   |
 
 ## 重启细胞
 
@@ -726,18 +726,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| jwt_token   | 用户token   | String   | 是   | header   | 
-| cellId   | cell的ID   | String   | 是   | -   | 
+| jwt_token   | 用户token   | String   | 是   | header   |
+| cellId   | cell的ID   | String   | 是   | -   |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 重启的细胞   | Cell   | Cell的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 重启的细胞   | Cell   | Cell的属性见上   |
 
 ## 找到所有该用户拥有的细胞
 
@@ -747,17 +747,17 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| jwt_token   | 用户token   | String   | 是   | header   | 
+| jwt_token   | 用户token   | String   | 是   | header   |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 细胞列表   | List<Cell>   | Cell的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 细胞列表   | List<Cell>   | Cell的属性见上   |
 
 ## 获得某类型细胞的信息
 
@@ -767,18 +767,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| jwt_token   | 用户token   | String   | 是   | header   | 
-| type   | 类型   | String   | 是   | -   | 
+| jwt_token   | 用户token   | String   | 是   | header   |
+| type   | 类型   | String   | 是   | -   |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 细胞信息   | CellInfo   | CellInfo的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 细胞信息   | CellInfo   | CellInfo的属性见上   |
 
 ## 用户收集信息到背包
 
@@ -788,10 +788,10 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| packId   | 收集信息的背包ID   | long   | 是   | -   | 
-| cellInfoType   | 收集到的细胞信息的细胞类型   | String   | 是   | -   | 
+| packId   | 收集信息的背包ID   | long   | 是   | -   |
+| cellInfoType   | 收集到的细胞信息的细胞类型   | String   | 是   | -   |
 
 **返回参数**：-
 
@@ -803,12 +803,12 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| answer   | 用户的答案   | String   | 是   | A,B,C,D   | 
-| questionId   | 答的题目的ID   | long   | 是   | -   | 
-| userId   | 用户ID   | long   | 是   | -   | 
-| roomId   | 房间id   | int   | 是   | -   | 
+| answer   | 用户的答案   | String   | 是   | A,B,C,D   |
+| questionId   | 答的题目的ID   | long   | 是   | -   |
+| userId   | 用户ID   | long   | 是   | -   |
+| roomId   | 房间id   | int   | 是   | -   |
 
 **返回参数**：-
 
@@ -820,10 +820,10 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| packId   | 收集信息的背包ID   | long   | 是   | -   | 
-| knowledgeId   | 知识点的ID   | long   | 是   | -   | 
+| packId   | 收集信息的背包ID   | long   | 是   | -   |
+| knowledgeId   | 知识点的ID   | long   | 是   | -   |
 
 **返回参数**：-
 
@@ -837,11 +837,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 当前背包信息   | Pack   | Pack的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 当前背包信息   | Pack   | Pack的属性见上   |
 
 注：在其余用户收集到信息时会广播给所有用户
 
@@ -855,11 +855,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 答题错误的题目ID   | Long   | -   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 答题错误的题目ID   | Long   | -   |
 
 ## 答题正确通知
 
@@ -871,11 +871,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 答题正确的题目ID   | Long   | -   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 答题正确的题目ID   | Long   | -   |
 
 ## 用户与NPC接触
 
@@ -885,11 +885,11 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| cellType   | 可能获得的细胞信息类型   | String   | 是   | *nerve, red, platelet, skin, stem, T, B, phagocyte*   | 
-| virusId   | NPC的ID   | long   | 是   | -   | 
-| userId   | 用户ID   | long   | 是   | -   | 
+| cellType   | 可能获得的细胞信息类型   | String   | 是   | *nerve, red, platelet, skin, stem, T, B, phagocyte*   |
+| virusId   | NPC的ID   | long   | 是   | -   |
+| userId   | 用户ID   | long   | 是   | -   |
 
 ## 随机获得一道问题
 
@@ -901,11 +901,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 问题   | ChoiceQuestion   | ChoiceQuestion的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 问题   | ChoiceQuestion   | ChoiceQuestion的属性见上   |
 
 ## 随机获得一个知识点
 
@@ -917,11 +917,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 知识点   | Knowledge   | Knowledge的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 知识点   | Knowledge   | Knowledge的属性见上   |
 
 ## 获得某类型细胞的信息
 
@@ -933,11 +933,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 细胞信息   | CellInfo   | CellInfo的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 细胞信息   | CellInfo   | CellInfo的属性见上   |
 
 ## 连接到服务器
 
@@ -947,14 +947,14 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| x   |    | int   | 是   |    | 
-| y   |    | int   | 是   |    | 
-| z   |    | int   | 是   |    | 
-| rotation   |    | float   | 是   |    | 
-| objectId   |    | user的ID   | 是   |    | 
-| roomId   | 房间id   | int   | 是   | -   | 
+| x   |    | int   | 是   |    |
+| y   |    | int   | 是   |    |
+| z   |    | int   | 是   |    |
+| rotation   |    | float   | 是   |    |
+| objectId   |    | user的ID   | 是   |    |
+| roomId   | 房间id   | int   | 是   | -   |
 
 ## 加载完毕
 
@@ -964,13 +964,13 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| x   |    | int   | 是   |    | 
-| y   |    | int   | 是   |    | 
-| z   |    | int   | 是   |    | 
-| rotation   |    | float   | 是   |    | 
-| objectId   |    | user的ID   | 是   |    | 
+| x   |    | int   | 是   |    |
+| y   |    | int   | 是   |    |
+| z   |    | int   | 是   |    |
+| rotation   |    | float   | 是   |    |
+| objectId   |    | user的ID   | 是   |    |
 
 ## 游戏开始
 
@@ -982,11 +982,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | json序列化的当前游戏背包（所有人共享），用户位置，npc位置等   | StartGameResponse   | 具体属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | json序列化的当前游戏背包（所有人共享），用户位置，npc位置等   | StartGameResponse   | 具体属性见上   |
 
 注：在接入游戏的用户数量大于等于2时会自动广播，目前设置人数上限为2，**所有用户加载完毕后还是这个接口会发一个content为“all users load finish”的信息**
 
@@ -1000,11 +1000,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 当前游戏人数   | int   | -   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 当前游戏人数   | int   | -   |
 
 ## 获得当前背包信息
 
@@ -1014,17 +1014,17 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----:|:----:|:----:|:----:|:----:|
-| jwt_token | 用户token | String | 是 | header | 
+| jwt_token | 用户token | String | 是 | header |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | json序列化的当前游戏背包（所有人共享）   | Pack   | Pack的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | json序列化的当前游戏背包（所有人共享）   | Pack   | Pack的属性见上   |
 
 ## 单个用户退出游戏
 
@@ -1034,13 +1034,13 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| x   |    | int   | 是   |    | 
-| y   |    | int   | 是   |    | 
-| z   |    | int   | 是   |    | 
-| rotation   |    | float   | 是   |    | 
-| objectId   |    | user的ID   | 是   |    | 
+| x   |    | int   | 是   |    |
+| y   |    | int   | 是   |    |
+| z   |    | int   | 是   |    |
+| rotation   |    | float   | 是   |    |
+| objectId   |    | user的ID   | 是   |    |
 
 ## 用户退出游戏通知
 
@@ -1052,11 +1052,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 退出游戏的用户信息   | User   | User的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 退出游戏的用户信息   | User   | User的属性见上   |
 
 注：在其余用户退出游戏时会广播给所有用户
 
@@ -1070,11 +1070,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 游戏是否胜利   | boolean   | -   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 游戏是否胜利   | boolean   | -   |
 
 注：这个事件会强制触发所有人离开现场（等价于调用cleanCurrentGame）
 
@@ -1086,18 +1086,18 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名 | 说明 | 类型 | 是否必填 | 备注 | 
+| 字段名 | 说明 | 类型 | 是否必填 | 备注 |
 |:----:|:----:|:----:|:----:|:----:|
-| jwt_token | 用户token | String | 是 | header | 
-| roomId   | 房间id   | int   | 是   | -   | 
+| jwt_token | 用户token | String | 是 | header |
+| roomId   | 房间id   | int   | 是   | -   |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 游戏是否胜利   | boolean   | -   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 游戏是否胜利   | boolean   | -   |
 
 ## 客户端更新位置
 
@@ -1107,13 +1107,13 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| x   |    | int   | 是   |    | 
-| y   |    | int   | 是   |    | 
-| z   |    | int   | 是   |    | 
-| rotation   |    | float   | 是   |    | 
-| objectId   |    | user的ID   | 是   |    | 
+| x   |    | int   | 是   |    |
+| y   |    | int   | 是   |    |
+| z   |    | int   | 是   |    |
+| rotation   |    | float   | 是   |    |
+| objectId   |    | user的ID   | 是   |    |
 
 ## 掉血请求
 
@@ -1123,10 +1123,10 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| dropNum   | 掉的血量   | int   | 是   | 还是包装成JSON传   | 
-| roomId   | 房间id   | int   | 是   | -   | 
+| dropNum   | 掉的血量   | int   | 是   | 还是包装成JSON传   |
+| roomId   | 房间id   | int   | 是   | -   |
 
 ## 血量更新
 
@@ -1138,11 +1138,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 当前血量   | int   | -   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 当前血量   | int   | -   |
 
 ## 初始化所有病毒NPC位置
 
@@ -1152,17 +1152,17 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| jwt_token   | 用户token   | String   | 是   | header   | 
+| jwt_token   | 用户token   | String   | 是   | header   |
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | json序列化的virusPositionMap   | Map<Virus, Position>   | Virus及Position的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | json序列化的virusPositionMap   | Map<Virus, Position>   | Virus及Position的属性见上   |
 
 ## 获得所有当前页面上细胞及病毒的位置
 
@@ -1174,11 +1174,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | json序列化的cellPositionMap及VirusPositionMap   | content.virusPositionMap:  Map<Virus, Position>  content.cellPositonMap:  Map<User, Position>   | Virus，User及Position的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | json序列化的cellPositionMap及VirusPositionMap   | content.virusPositionMap:  Map<Virus, Position>  content.cellPositonMap:  Map<User, Position>   | Virus，User及Position的属性见上   |
 
 注：更新过程中会判断细胞与病毒是否碰撞，这里判断的是在碰撞的情况下，如果cell的背包已经收集全cellInfo，则病毒死亡，否则细胞死亡
 
@@ -1192,11 +1192,11 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| toId   | 要发送给的用户的ID   | long   | 是   | -   | 
-| fromId   | 来自的用户的ID   | long   | 是   | -   | 
-| content   | 聊天内容   | String   | 是   | -   | 
+| toId   | 要发送给的用户的ID   | long   | 是   | -   |
+| fromId   | 来自的用户的ID   | long   | 是   | -   |
+| content   | 聊天内容   | String   | 是   | -   |
 
 **返回参数**：（订阅获得一对一聊天信息的URL获取发送给自己的消息）
 
@@ -1210,11 +1210,11 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 聊天信息   | ChatMessage   | ChatMessage的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 聊天信息   | ChatMessage   | ChatMessage的属性见上   |
 
 ## 发送与其余用户公开聊天消息
 
@@ -1224,12 +1224,12 @@ private int maxPlayNum = 2;
 
 **请求参数**：
 
-| 字段名   | 说明   | 类型   | 是否必填   | 备注   | 
+| 字段名   | 说明   | 类型   | 是否必填   | 备注   |
 |:----|:----|:----|:----|:----|
-| toId   | 要发送给的用户的ID   | long   | 是   | 填-1就行   | 
-| fromId   | 来自的用户的ID   | long   | 是   | -   | 
-| content   | 聊天内容   | String   | 是   | -   | 
-| roomId   | 房间id   | int   | 是   | -   | 
+| toId   | 要发送给的用户的ID   | long   | 是   | 填-1就行   |
+| fromId   | 来自的用户的ID   | long   | 是   | -   |
+| content   | 聊天内容   | String   | 是   | -   |
+| roomId   | 房间id   | int   | 是   | -   |
 
 **返回参数**：（订阅获得公开聊天信息的URL获取发送给自己的消息）
 
@@ -1243,12 +1243,12 @@ private int maxPlayNum = 2;
 
 **返回参数**：
 
-| 字段名   | 说明   | 类型   | 备注   | 
+| 字段名   | 说明   | 类型   | 备注   |
 |:----|:----|:----:|:----|:----|
-| code   | 200：成功  其他：失败   | int   | -   | 
-| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   | 
-| content   | 聊天信息   | ChatMessage   | ChatMessage的属性见上   | 
+| code   | 200：成功  其他：失败   | int   | -   |
+| message   | "success"：成功  其他：失败（信息在字符串中有说明）   | String   | -   |
+| content   | 聊天信息   | ChatMessage   | ChatMessage的属性见上   |
 
-## 
+
 
 
